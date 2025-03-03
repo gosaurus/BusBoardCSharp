@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace BusBoard {
     class Arrival {
         public required string naptanId { get; set; }
