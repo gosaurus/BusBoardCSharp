@@ -6,12 +6,6 @@ namespace BusBoard {
         public required string lineId { get; set; }
         public required string destinationName { get; set; }
         public required int timeToStation { get; set; }
-        public int? minutesToStation { 
-            get {
-                return convertSecondsToMinutes(timeToStation); 
-            }
-        
-        }
         public int convertSecondsToMinutes(int timeToStation) {
             var timeToStationMinutes = timeToStation / 60;
             return timeToStationMinutes;
