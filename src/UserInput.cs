@@ -7,12 +7,11 @@ namespace BusBoard
             Console.WriteLine("Enter stopcode: ");
             string rawInput = Console.ReadLine()!;
             string userInput = rawInput.Trim([' ']);
-            if (userInput != null)
+            if (userInput == null)
             {
-                return userInput;
-            }
-            else
                 return GetUserInput();
+            }
+            return userInput;
         }
     }
 }
