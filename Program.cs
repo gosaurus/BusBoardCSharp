@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text.Json;
 using RestSharp;
 
 namespace BusBoard
@@ -6,10 +7,10 @@ namespace BusBoard
     class BusBoard {
         public static async Task Main()
         {
-            // var options = new JsonSerializerOptions
-            // {
-            //     PropertyNameCaseInsensitive = true
-            // };
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
             string userPostcode = UserInput.GetUserInput();
 
@@ -37,9 +38,12 @@ namespace BusBoard
             {
                 Console.WriteLine("No buses arriving to this stop point. Try another postcode.");
             }
-            for (int count = 0; count < Math.Min(sortedArrivalsList.Count, 5); count++)
+            else
             {
-                Console.WriteLine($"{count+1}. {sortedArrivalsList[count]}");
+                for (int count = 0; count < Math.Min(sortedArrivalsList.Count, 5); count++)
+                {
+                    Console.WriteLine($"{count+1}. {sortedArrivalsList[count]}");
+                }
             }
         }
     }
