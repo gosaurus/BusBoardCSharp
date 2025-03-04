@@ -4,7 +4,7 @@ namespace BusBoard
     {
         public static string GetUserInput()
         {   
-            Console.WriteLine("Enter stopcode: ");
+            Console.WriteLine("Enter postcode: ");
             string rawInput = Console.ReadLine()!;
             string userInput = rawInput.Trim([' ']);
             if (userInput == null)

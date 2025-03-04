@@ -4,13 +4,9 @@ namespace BusBoard {
         public required string lineId { get; set; }
         public required string destinationName { get; set; }
         public required int timeToStation { get; set; }
-        public int convertSecondsToMinutes(int timeToStation) {
-            var timeToStationMinutes = timeToStation / 60;
-            return timeToStationMinutes;
-        }
         public override string ToString()
         {
-            return $"Bus {lineId} towards {destinationName} arriving in {convertSecondsToMinutes(timeToStation)} mins.";
+            return $"Bus {lineId} towards {destinationName} arriving in {TimeHelpers.SecondsToMinutes(timeToStation)} mins.";
         } 
 
         public static List<Arrival> SortListOfArrivals(List<Arrival> arrivalsList)

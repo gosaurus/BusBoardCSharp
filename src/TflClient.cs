@@ -8,6 +8,7 @@ namespace BusBoard
             new RestClientOptions("https://api.tfl.gov.uk/StopPoint/");
         private static readonly RestClient stopPointClient =
             new RestClient(options);
+
         public static async Task<List<Arrival>> GetArrivalsToStopPoint(string userStopPoint)
         {
             var request = new RestRequest(userStopPoint+"/Arrivals");
@@ -18,5 +19,22 @@ namespace BusBoard
             }
             return response;
         }
+
+        public static async Task<StopPointAPIResponse> GetStopPointsNearPostcode(
+            double longitude, double latitude
+        )
+        {
+            var request = new RestRequest
+            (
+                "/?lat="+latitude+"&lon="+longitude+"&stopTypes=NaptanPublicBusCoachTram"
+            );
+            var response = await stopPointClient.GetAsync<StopPointAPIResponse>(request);
+            if (response == null)
+            {
+                throw new Exception("TFL API error");
+            }
+            return response;
+        }
     }
+
 }
