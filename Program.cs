@@ -24,14 +24,23 @@ namespace BusBoard
             {
                 Console.WriteLine($"\n{stopPoint}");
                 var arrivalsList = await TflClient.GetArrivalsToStopPoint(stopPoint.NaptanId);
-                var sortedArrivalsList = Arrival.SortListOfArrivals(arrivalsList);
-                Console.WriteLine("Next buses to arrive:");
-                for (int count = 0; count < sortedArrivalsList.Slice(0,5).Count; count++)
-                {
-                    Console.WriteLine($"{count+1}. {sortedArrivalsList[count]}");
-                }
-            }
 
+                var sortedArrivalsList = Arrival.SortListOfArrivals(arrivalsList);
+                displaySortedArrivalsList(sortedArrivalsList);
+            }
+        }
+
+        public static void displaySortedArrivalsList(List<Arrival> sortedArrivalsList) 
+        {
+            Console.WriteLine("Next buses to arrive:");
+            if (sortedArrivalsList.Count == 0)
+            {
+                Console.WriteLine("No buses arriving to this stop point. Try another postcode.");
+            }
+            for (int count = 0; count < Math.Min(sortedArrivalsList.Count, 5); count++)
+            {
+                Console.WriteLine($"{count+1}. {sortedArrivalsList[count]}");
+            }
         }
     }
 }
