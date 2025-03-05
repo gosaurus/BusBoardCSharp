@@ -7,8 +7,7 @@ namespace BusBoard
         public static string GetUserInput()
         {   
             Console.WriteLine("Enter a valid postcode (case insensitive): ");
-            string rawInput = Console.ReadLine()!;
-            string userInput = rawInput.Trim([' ']);
+            string userInput = Console.ReadLine()!.Trim([' ']);
             string pattern = @"[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{1,2}";
             Regex postcodeRegex = new Regex(pattern, RegexOptions.IgnoreCase); 
             Match validPostcode = postcodeRegex.Match(userInput);

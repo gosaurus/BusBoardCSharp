@@ -1,3 +1,4 @@
+using System.Text.Json;
 using RestSharp;
 
 namespace BusBoard
@@ -13,6 +14,10 @@ namespace BusBoard
             if (response == null)
             {
                 throw new Exception("Postcodes.io API error");
+            }
+            else if (response.status == 404)
+            {
+                throw new Exception("Postcode not found.");
             }
             return response; 
         }

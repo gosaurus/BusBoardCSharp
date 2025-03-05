@@ -1,23 +1,18 @@
-using System.Text.Json.Serialization;
+using RestSharp;
+
 namespace BusBoard
 {
-    class Postcode
+    public class Postcode
     {
-        [JsonPropertyName("longitude")]
         public required double Longitude { get; set; }
-        [JsonPropertyName("latitude")]
         public required double Latitude { get; set; }
 
     }
 
-    class PostcodeAPIResponse
+    public class PostcodeAPIResponse
     {
-        [JsonPropertyName("result")]
         public Postcode? Result { get; set; }
+        public int? status { get; set;}
     }
 
-    class PostcodeHelpers
-    {
-        
-    }
 }
