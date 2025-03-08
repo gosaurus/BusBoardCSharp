@@ -1,9 +1,13 @@
 using RestSharp;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace BusBoard
 {
     class TflClient
     {
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         private static readonly RestClientOptions options = 
             new RestClientOptions("https://api.tfl.gov.uk/StopPoint/");
         private static readonly RestClient stopPointClient =

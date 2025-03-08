@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using RestSharp;
 
@@ -11,15 +12,17 @@ namespace BusBoard
         {
             var request = new RestRequest(userPostcode);
             var response = await postcodeClient.GetAsync<PostcodeAPIResponse>(request);
+
             if (response == null)
-            {
-                throw new Exception("Postcodes.io API error");
-            }
-            else if (response.status == 404)
-            {
-                throw new Exception("Postcode not found.");
-            }
-            return response; 
+                {
+                    throw new Exception($"No API response {response}");
+                }
+            else if (response.Status != 200)
+                {
+                    return response;
+                }
+            else
+                return response;
         }
     }
 }
