@@ -19,7 +19,7 @@ namespace BusBoard
             if (response == null)
             {
                 Logger.Error("No response from TFL API.");
-                throw new Exception("TFL API error");
+                throw new Exception("No response from TfL API. Contact the API provider.");
             }
             return response;
         }
@@ -35,7 +35,7 @@ namespace BusBoard
             if (response == null)
             {
                 Logger.Error("No response from TFL API.");
-                throw new Exception("TFL API error");
+                throw new Exception("No response from TfL API. Contact the API provider.");
             }
             return response;
         }

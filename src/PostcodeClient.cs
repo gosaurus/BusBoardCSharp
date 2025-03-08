@@ -18,7 +18,7 @@ namespace BusBoard
             if (response == null)
                 {
                     Logger.Error("No API response. Exception thrown.");
-                    throw new Exception($"No API response {response}");
+                    throw new Exception($"No API response {response} from Postcode.io. Contact the API provider.");
                 }
             else if (response.Status != 200)
                 {
