@@ -18,6 +18,7 @@ namespace BusBoard
             var response = await stopPointClient.GetAsync<List<Arrival>>(request);
             if (response == null)
             {
+                Logger.Error("No response from TFL API.");
                 throw new Exception("TFL API error");
             }
             return response;
@@ -33,6 +34,7 @@ namespace BusBoard
             var response = await stopPointClient.GetAsync<StopPointAPIResponse>(request);
             if (response == null)
             {
+                Logger.Error("No response from TFL API.");
                 throw new Exception("TFL API error");
             }
             return response;

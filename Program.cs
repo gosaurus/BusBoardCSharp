@@ -6,13 +6,14 @@ using NLog.Targets;
 namespace BusBoard
 {
     class BusBoard {
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         public static async Task Main()
         {
             // Logger config
             var config = new LoggingConfiguration();
             var target = new FileTarget 
                 { 
-                    FileName = @"./Logger.log",
+                    FileName = @"Logger.log",
                     Layout = @"${longdate} ${level} - ${logger}: ${message}"
                 };
             config.AddTarget("File Logger", target);
@@ -36,13 +37,13 @@ namespace BusBoard
                     latitude: postcodeData.Result.Latitude,
                     longitude: postcodeData.Result.Longitude
                 );
-                
+
                 if (stopPointList.StopPoints.Count == 0)
                 {
-                    Console.WriteLine($"No bus stops within 200m of {userPostcode}. Enter another postcode."); //
+                    Console.WriteLine($"No bus stops within 200m of {userPostcode}. Enter another postcode.");
                     continue; 
                 }
-                
+
                 foreach (var stopPoint in stopPointList.StopPoints)
                 {
                     Console.WriteLine($"\n{stopPoint}");
