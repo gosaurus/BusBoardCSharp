@@ -5,14 +5,34 @@ namespace BusBoard
     class BusBoard {
         public static async Task Main()
         {
-            string userStopPoint = UserInput.GetUserInput();
-            var arrivalsList = await TflClient.GetArrivalsToStopPoint(userStopPoint);
-            var sortedArrivalsList = Arrival.SortListOfArrivals(arrivalsList);
-            Console.WriteLine("Next buses to arrive:");
-            foreach (var arrival in sortedArrivalsList.Slice(0,5))
-            {
-                Console.WriteLine(arrival);
+            bool continueProgram = true;
+
+            while (continueProgram)
+                {
+                string userPostcode = UserInput.GetUserInput();
+
+                var postcodeData = await PostcodeClient.GetPostcodeData(userPostcode);
+                var stopPointList = await TflClient.GetStopPointsNearPostcode(
+                    latitude: postcodeData.Result.Latitude,
+                    longitude: postcodeData.Result.Longitude
+                );
+                
+                if (stopPointList.StopPoints.Count == 0)
+                {
+                    Console.WriteLine($"No bus stops within 200m of {userPostcode}. Enter another postcode."); //
+                    continue; 
+                }
+                
+                foreach (var stopPoint in stopPointList.StopPoints)
+                {
+                    Console.WriteLine($"\n{stopPoint}");
+                    var arrivalsList = await TflClient.GetArrivalsToStopPoint(stopPoint.NaptanId);
+                    var sortedArrivalsList = Arrival.SortListOfArrivals(arrivalsList);
+                    Arrival.displaySortedArrivalsList(sortedArrivalsList);
+                }
+
+                continueProgram = false;
             }
-        }
+        } 
     }
 }
